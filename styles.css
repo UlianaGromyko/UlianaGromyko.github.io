@@ -1,0 +1,138 @@
+body {
+  margin:0px;
+  display: flex;
+  flex-direction: column;
+  background-color: #cfff0a; /*that good old toxic green */
+}
+
+
+h1 {
+  margin: 0px;
+  height: 300px;
+  font-family: "itc-avant-garde-gothic-pro", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 270px;
+  line-height: 270px;
+  margin-left: 40px;
+}
+
+.collection {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  justify-content: left;
+}
+
+.vid{
+  display: flex;
+  flex-direction: row;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  align-content: center;
+  justify-content: center;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 165px;
+  height: 600px;
+  margin: 1px;
+
+  mix-blend-mode: multiply;
+}
+a:hover{
+  mix-blend-mode: normal;
+}
+
+.link{
+  margin: 0px;
+  height: 95px;
+  width: 100%;
+  font-family: "itc-avant-garde-gothic-pro", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 70px;
+  line-height: 70px;
+  margin-left: 0px;
+  margin-right: 70px;
+  overflow: visible;
+
+  text-decoration: none;
+  color: black;
+
+  justify-content: right;
+  align-items: center;
+}
+
+.link:hover{
+  background-color: black;
+  color: #cfff0a;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mySliders{
+  background-color: white;
+  -webkit-appearance: none;
+   background-color: black;
+   outline-color: white;
+   outline-style: solid;
+   border-radius: 20px;
+   height: 16px;
+}
+
+.mySliders:hover {
+  background-color: #f8b717;
+}
+
+.mySliders::-webkit-slider-thumb {
+  z-index: 2;
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 30px; /* Set a specific slider handle width */
+  height: 30px; /* Slider handle height */
+  background: black; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 15px;
+  outline-color: white;
+   outline-style: solid;
+}
+.mySliders::-webkit-slider-thumb:hover {
+background: #f8b717;
+
+}
