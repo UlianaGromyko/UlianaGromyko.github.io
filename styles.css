@@ -75,13 +75,13 @@ a:hover{
   color: #cfff0a;
 }
 
-.challenge{
+a.challenge{
   display: flex;
   flex-direction: row;
 
 }
 
-.bullet{
+a.bullet{
   width:14%;
   height: 150px;
   background-color: black;
@@ -93,7 +93,7 @@ a:hover{
   text-decoration: none;
 }
 
-.bullet:hover{
+a.bullet:hover{
   background-color: white;
   font-size: 70px;
   color: black;
