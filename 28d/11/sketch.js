@@ -3,7 +3,7 @@ let p=[];
 
 function setup() {
   createCanvas(1790, 1160);
-  video = createCapture(VIDEO,{ flipped:true });
+  video = createCapture(VIDEO, { flipped:true });
   video.hide();
   video.size(width,height);
   textFont('Courier New');
@@ -17,11 +17,10 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+ background(0);
   fill(255);
   noStroke();
   video.loadPixels();
-  console.log(video.pixels[300]);
   
   for(let i=0; i<p.length; i++){
     text(p[i].c , p[i].x, p[i].y);
