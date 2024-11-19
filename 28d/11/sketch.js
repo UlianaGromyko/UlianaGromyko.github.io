@@ -19,7 +19,7 @@ function setup() {
 function draw() {
   background(0);
   fill(255);
-  stroke(255);
+  noStroke();
   video.loadPixels();
   console.log(video.pixels[300]);
   
