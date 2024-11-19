@@ -1,87 +1,93 @@
-
-let cols = 15;  // Number of columns
-let rows = 15;  // Number of rows
-let cellSize; // Size of each cell
-let spread = 60;
-
-// let font;
-let shown = true;
-
-let corners = 20;
-let lineheight =25;
-let tp = 5;
-let l=1;
-
-// function preload() {
-//   font = loadFont('Outfit-SemiBold.ttf');
-// }
+let video;
+let p=[];
 
 function setup() {
-  createCanvas(1790 , 960);
-  cellSize = windowWidth / cols; // Assuming a square canvas
-
-  noCursor();
-}
-
-function mouseClicked() {
-  if (spread < 200) {
-    spread = spread +50;
-  } else {
-    spread = 50;
+  createCanvas(1790, 1160);
+  video = createCapture(VIDEO,{ flipped:true });
+  video.hide();
+  video.size(width,height);
+  textFont('Courier New');
+  let index=0;
+  for(let i=0; i<width; i+=textSize()){
+    for(let j=0; j<height; j+=textSize()){
+      p[index] = new Char('&', i, j);
+      index++;
+    }
   }
 }
 
 function draw() {
-
-  background(255);
-
-  fill(0);
+  background(0);
+  fill(255);
   stroke(255);
-  strokeWeight(1);
-
+  video.loadPixels();
+  console.log(video.pixels[300]);
   
-  for (let i = 0; i < cols+1; i++) {
-    for (let j = 0; j < rows+1; j++) {
-      let x = i * cellSize ;
-      let y = j * cellSize ;
-      
-      let d = dist(x,y,mouseX,mouseY);
-      
-      rect(x-cellSize/2,y-cellSize/2,cellSize,cellSize, spread/(d/30));
-      
-      
+  for(let i=0; i<p.length; i++){
+    text(p[i].c , p[i].x, p[i].y);
+    p[i].update(video);
+  }
+  
+}
+
+class Char{
+  constructor(c, x, y){
+    this.c = c;
+    this.x = x;
+    this.y = y; 
+  }
+  update(video){
+    let index = (this.y * video.width + this.x) * 4;
+    let r = video.pixels[index];
+    let g = video.pixels[index+1];
+    let b = video.pixels[index+2];
+    let w = (r+g+b)/7.65;
+    if(w<10){ 
+      this.c = ' ';
+    } else if(w<20){ 
+      this.c = '.';
+    } else if(w<30){ 
+      this.c = ':';
+    } else if(w<40){ 
+      this.c = '-';
+    } else if(w<50){ 
+      this.c = '=';
+    } else if(w<60){ 
+      this.c = '+';
+    } else if(w<70){ 
+      this.c = '*';
+    } else if(w<80){ 
+      this.c = '#';
+    } else if(w<90){ 
+      this.c = '%';
+    } else { 
+      this.c = '@';
     }
     
-  }
-  
-  explain();
-  translate(cellSize/2, cellSize/2);
-}
-
-function explain(){
-
-   // textFont(font);
-    textAlign(LEFT, CENTER);
-  if (mouseIsPressed === true){
-    shown=false;
-  }
-  if(shown === true){
     
-    strokeWeight(2);
-    stroke(0);
     
-    fill(0);
-    rect(mouseX+tp, mouseY+tp, 230, lineheight*l+40, 0, corners, corners, corners);
-    fill(204,255,10);
-    rect(mouseX, mouseY, 230, lineheight*l+40, 0, corners, corners, corners);
+    // } // if(w<10){ 
+    //   this.c = '@';
+    // } else if(w<20){ 
+    //   this.c = '%';
+    // } else if(w<30){ 
+    //   this.c = '#';
+    // } else if(w<40){ 
+    //   this.c = '*';
+    // } else if(w<50){ 
+    //   this.c = '+';
+    // } else if(w<60){ 
+    //   this.c = '=';
+    // } else if(w<70){ 
+    //   this.c = '-';
+    // } else if(w<80){ 
+    //   this.c = ':';
+    // } else if(w<90){ 
+    //   this.c = '.';
+    // } else { 
+    //   this.c = '';
+    // } 
     
-    textSize(20);
-    noStroke();
-    
-    fill(0);
-    text('feel free to:', mouseX+15, mouseY-10+tp, 300, 60);
-    l = 1;
-    text('click & move mouse', mouseX+15, mouseY+lineheight*l+tp, 300, 60);
-    l++;
   }
 }
+
