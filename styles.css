@@ -50,7 +50,7 @@ a:hover{
   mix-blend-mode: normal;
 }
 
-.link{
+a.link{
   margin: 0px;
   height: 95px;
   width: 100%;
@@ -64,15 +64,18 @@ a:hover{
   overflow: visible;
 
   text-decoration: none;
-  color: black;
+
+  background-color: black;
+  color: #cfff0a;
 
   justify-content: right;
   align-items: center;
 }
 
-.link:hover{
-  background-color: black;
-  color: #cfff0a;
+a.link:hover{
+  color: #e8e8e8;
+
+
 }
 
 .challenge{
@@ -89,12 +92,11 @@ a.bullet{
   color: white;
   padding: 40px;
   font-family: "itc-avant-garde-gothic-pro", sans-serif;
-
   text-decoration: none;
 }
 
 a.bullet:hover{
-  background-color: white;
+  background-color: #e8e8e8;
   font-size: 70px;
   color: black;
 }
