@@ -75,7 +75,7 @@ a:hover{
   color: #cfff0a;
 }
 
-a.challenge{
+.challenge{
   display: flex;
   flex-direction: row;
 

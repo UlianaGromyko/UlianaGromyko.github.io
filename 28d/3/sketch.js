@@ -5,12 +5,12 @@ let size=[];
 let count=0;
 
 function setup() {
-  createCanvas(400 , 400);
+  createCanvas(900 , 960);
   // noStroke();
   strokeWeight(10);
 
-  fill(0);
-  stroke(255);
+  fill(255);
+  stroke(0);
   
   for(let i=0; i<num; i++){
     x[i] = 0;
@@ -20,7 +20,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background(0);
   count += 0.03;
   circle(mouseX, mouseY, map(sin(count), -1, 1, 80, 120));
   
@@ -36,7 +36,8 @@ function draw() {
   }
   
   
-  filter(BLUR,10);
+  //filter(BLUR,10);
+  drawingContext.filter = 'blur(10px)';
   filter(THRESHOLD);
 }
 
