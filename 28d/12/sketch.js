@@ -1,8 +1,8 @@
-let space = 50;
+let space = 90;
 let p=[];
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(1790 , 960);
   //noStroke();
   stroke(0, 10);
   let index=0;
