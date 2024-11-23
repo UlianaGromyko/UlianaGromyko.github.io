@@ -2,7 +2,7 @@ let space = 100;
 let p=[];
 
 function preload(){
-  img = loadImage('https://static.wikia.nocookie.net/mugen/images/e/ef/Windows_Cursor.png/revision/latest?cb=20120314105819');
+  img = loadImage('https://static.wikia.nocookie.net/mugen/images/e/ef/Windows_Cursor.png');
 }
 
 function setup() {
