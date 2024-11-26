@@ -5,7 +5,7 @@ let size=[];
 let count=0;
 
 function setup() {
-  createCanvas(400,400);
+  createCanvas(1790 , 960);
   // noStroke();
   strokeWeight(10);
 
@@ -36,7 +36,7 @@ function draw() {
   }
   
   
-  filter(BLUR,10);
-  filter(THRESHOLD);
+  filter(BLUR,6);
+  filter(THRESHOLD, 0.1);
 }
 
