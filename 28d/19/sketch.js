@@ -7,7 +7,7 @@ let edit = false;
 let selected = [];
 
 function setup() {
-  createCanvas(1790, 960);
+  createCanvas(1800, 950);
   bg = color(240);
   noCursor();
 
