@@ -7,7 +7,7 @@ let edit = false;
 let selected = [];
 
 function setup() {
-  createCanvas(1800, 950);
+  createCanvas(1790, 960);
   bg = color(240);
   noCursor();
 
@@ -405,6 +405,7 @@ class Button1 {
     ) {
       if (this.selected) {
         this.selected = false;
+        edit = false;
       } else {
         this.selected = true;
       }
