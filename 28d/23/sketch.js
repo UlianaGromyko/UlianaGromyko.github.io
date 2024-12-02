@@ -33,7 +33,9 @@ function draw() {
     }
   }
   t+=0.1;
-  
+  if(buttons.length>40){
+    buttons.splice(0,20);
+  }
 }
 
 function flip(value){
