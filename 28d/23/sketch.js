@@ -3,7 +3,7 @@ let buttons = [];
 let min = 20;
 let max = 500;
 let minColor = -10;
-let maxColor = 40;
+let maxColor = 60;
 let horizontal = true;
 let t=0;
 let time=0;
@@ -18,7 +18,7 @@ function setup() {
   bg = color(200,200,200);
   let orgin = createVector(width / 2 - 50, height / 2 - 50);
   let orginSize = createVector(100,100);
-  buttons[0] = new Button(orgin, orginSize ,orgin.x , orgin.y, 100, 100, 255/2, 100,100,100);
+  buttons[0] = new Button(orgin, orginSize ,orgin.x , orgin.y, 100, 100, 255/2, 0,0,0);
 }
 
 function draw() {
@@ -68,16 +68,21 @@ class Button {
         mouseY > this.pos.y &&
         mouseY < this.size.y + this.pos.y
       ) {
+
+        let k=-20;
+        stroke(this.r+k, this.g+k, this.b+k);
         fill(this.r, this.g, this.b);
         this.selected = true;
+
       } else {
-        fill(this.r+20, this.g+20, this.b+20);
+        fill(this.r, this.g, this.b);
         this.selected = false;
       }
     } else {
       fill(this.r, this.g, this.b);
     }
     rect(this.pos.x, this.pos.y, this.size.x, this.size.y, 10);
+    stroke(bg);
   }
   animate(){
     this.pos.x = map(t, 0, animationLength, this.from.x, this.to.x);
