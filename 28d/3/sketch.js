@@ -5,10 +5,10 @@ let size=[];
 let count=0;
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(1790 , 300);
   // noStroke();
   strokeWeight(10);
-
+  noCursor();
   fill(255);
   stroke(0);
   
@@ -21,21 +21,27 @@ function setup() {
 
 function draw() {
   background(0);
-  count += 0.03;
-  circle(mouseX, mouseY, map(sin(count), -1, 1, 80, 120));
+  circle(mouseX, height, 100);
   
   
   for(let i=0; i<num; i++){
     if(random(0,100)>99 && y[i]<-50){
       x[i] = mouseX+ random(-50, 50);
-      y[i] = mouseY;
+      y[i] = height;
       size[i] = random(10,80);
     }
     circle(x[i], y[i], size[i]);
     y[i] -= 10;
   }
   
-  
+  fill(0);
+  stroke(250);
+  strokeWeight(2);
+  circle(mouseX, mouseY, 50);
+  fill(255);
+  stroke(0);
+  strokeWeight(10);
+
   filter(BLUR,6);
   filter(THRESHOLD, 0.1);
 }

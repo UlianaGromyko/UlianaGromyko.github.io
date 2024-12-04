@@ -6,7 +6,7 @@ let maxCount;
 let r = 300;
 
 function setup() {
-  createCanvas(1760,960);
+  createCanvas(1790,960);
   fill(255);
   stroke(100);
   noCursor();

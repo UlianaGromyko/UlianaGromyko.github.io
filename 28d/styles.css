@@ -14,15 +14,15 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 30px;
+  height: 120px;
 }
 
 a {
-  height: 30px;
+  padding: 45px;
   width: 300px;
+  text-align: center;
 
   background-color: black;
-  outline-style: none;
 
   font-family: "itc-avant-garde-gothic-pro", sans-serif;
   font-weight: 500;
