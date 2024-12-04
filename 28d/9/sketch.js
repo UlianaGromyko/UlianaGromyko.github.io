@@ -23,7 +23,9 @@ function draw() {
 
   for (let i = 0; i < p.length; i++) {
     let index = (p[i].orgin.y*capture.width + p[i].orgin.x)*4;
-    fill((capture.pixels[index+0]++capture.pixels[index+1]+capture.pixels[index+2])/3 );
+    fill(capture.pixels[index+0], 
+        capture.pixels[index+1], 
+        capture.pixels[index+2]);
     
     p[i].update();
     p[i].display();
@@ -45,7 +47,7 @@ class Particle {
 
     if(dist(this.pos.x, this.pos.y, mouseX, mouseY)<30){
       let influence = createVector(movedX, movedY);
-      influence.mult(1);  //the higher, the more powerful the influence 
+      influence.mult(0.9);  //the higher, the more powerful the influence 
       this.acc.add(influence);
     }
       this.acc.div(dist(pmouseX, pmouseY, this.pos.x, this.pos.y));
@@ -56,7 +58,7 @@ class Particle {
     this.pos.add(this.vel);
     
     let diff = createVector((this.orgin.x - this.pos.x),(this.orgin.y - this.pos.y));
-      diff.mult(0.01);
+      diff.mult(0.1);
     this.pos.add(diff);
     
   }
@@ -66,3 +68,4 @@ class Particle {
     //circle(this.pos.x, this.pos.y, 10);
   }
 }
+
