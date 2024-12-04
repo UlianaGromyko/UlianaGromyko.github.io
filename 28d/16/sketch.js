@@ -5,7 +5,7 @@ function setup() {
   createCanvas(1790 , 960);
   noFill();
   noCursor();
-  stroke(255,200,200);
+  stroke(0);
   strokeWeight(5);
   
   let index=0;
@@ -29,7 +29,7 @@ function setup() {
 }
 
 function draw() {
-  background(150,140,130,96);
+  background(220,20,20,96);
   for(let i=0; i<v.length; i++){
     v[i].update(mouseX, mouseY);
     v[i].display();
