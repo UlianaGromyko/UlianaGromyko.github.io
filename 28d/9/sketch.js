@@ -3,7 +3,7 @@ let room = 20;
 let capture;
 
 function setup() {
-  createCanvas(1790, 960);
+  createCanvas(1790, 1160);
   for(let i=0; i<width; i+=room){
     for(let j=0; j<height; j+=room){
       p.push(new Particle(i, j, room));
@@ -54,7 +54,7 @@ class Particle {
       
 
       this.vel.add(this.acc);
-      this.vel.mult(0.999);   // the lower, the stiffer, the quicker stabilisation
+      this.vel.mult(0.9);   // the lower, the stiffer, the quicker stabilisation
     this.pos.add(this.vel);
     
     let diff = createVector((this.orgin.x - this.pos.x),(this.orgin.y - this.pos.y));
