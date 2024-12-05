@@ -23,9 +23,9 @@ function draw() {
 
   for (let i = 0; i < p.length; i++) {
     let index = (p[i].orgin.y*capture.width + p[i].orgin.x)*4;
-    fill(capture.pixels[index+0], 
-        capture.pixels[index+1], 
-        capture.pixels[index+2]);
+    fill((capture.pixels[index+0]+ 
+            capture.pixels[index+1]+ 
+            capture.pixels[index+2])/3);
     
     p[i].update();
     p[i].display();
