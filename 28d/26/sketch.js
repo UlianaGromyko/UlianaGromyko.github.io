@@ -1,6 +1,7 @@
 let g=[];
 let horizon=600;
-let n, a, s;
+let n, a, s, b, f;
+let t=0;
 
 function setup() {
   createCanvas(1790 , 960);
@@ -11,6 +12,9 @@ function setup() {
   a = color('rgb(255,223,238)'); //afternoon
   s = color(250,180,100); //sunset
   d = color('rgb(9,9,94)'); //dark
+  
+  b = new Backdrop(70,100,40);
+  f = new Backdrop(5,10,250);
   
   let index=0;
   for(let i=0; i<width; i+=random(20,40)){
@@ -26,28 +30,19 @@ function setup() {
 
 function draw() {
   
-  let hy = horizon-mouseY;
-  let sky;
-  if(hy > 200){
-    sky = color(map(hy, horizon, 200, red(n), red(a)),  
-                map(hy, horizon, 200, green(n), green(a)),  
-                map(hy, horizon, 200, blue(n), blue(a)));
-  } else if(hy>0){
-    sky = color(map(hy, 0, 200, red(s),red(a)), 
-                map(hy, 0, 200, green(s),green(a)), 
-                map(hy, 0, 200, blue(s), blue(a)));
-  } else {
-    sky = color(map(mouseY, horizon, height, red(s),red(d)), 
-                map(mouseY, horizon, height, green(s),green(d)), 
-                map(mouseY, horizon, height, blue(s), blue(d)));
+  drawSky();
+  b.display();
+  f.display();
+  
+  t++;
+  if(t%3==1){
+    f.run();
+  }
+  if(t==9){
+    b.run();
+    t=0;
   }
   
-  let sun = color(255, hy*0.2+130,hy*0.25);
-  noStroke();
-
-  background(sky);
-  fill(sun);
-  circle(mouseX, mouseY, 40);
   
   fill(0);
   stroke(0);
@@ -65,7 +60,64 @@ function draw() {
     } else if(random(250)<1){
       g[g.length] = new House(width+50,horizon);
     }
-  rect(0, horizon, width, height-horizon);
+  //rect(0, horizon, width, height-horizon);
+}
+
+class Backdrop{
+  constructor(far, contrast, opacity){ // 20, 30
+    this.h =[];
+    this.count=0;
+    this.contrast = contrast;
+    this.opacity = opacity;
+    this.far = far;
+    for(let i=0; i<width/3+9; i++){
+      this.h[i] = this.contrast * noise(0.02 * i)+horizon-this.far;
+      this.count++;
+    }
+  }
+  display(){
+    stroke(0, this.opacity);
+    strokeWeight(4);
+    for(let i=0; i<this.h.length; i++){
+      line(i*3-t/3, height, i*3-t/3, this.h[i]);
+    }
+  }
+  run(){
+    for(let i=0; i<this.h.length; i++){
+      if(i != this.h.length-1){
+        this.h[i] = this.h[i+1];
+      } else {
+        this.h[i] = this.contrast * noise(0.02 * this.count)+horizon-this.far;
+        this.count++;
+      }
+    }
+  }
+}
+
+function drawSky(){
+  let hy = horizon-mouseY;
+  let sky;
+  if(hy > 200){
+    sky = color(map(hy, horizon, 200, red(n), red(a)),  
+                map(hy, horizon, 200, green(n), green(a)),  
+                map(hy, horizon, 200, blue(n), blue(a)));
+  } else if(hy>0){
+    sky = color(map(hy, 0, 200, red(s),red(a)), 
+                map(hy, 0, 200, green(s),green(a)), 
+                map(hy, 0, 200, blue(s), blue(a)));
+  } else {
+    sky = color(map(mouseY, horizon, height, red(s),red(d)), 
+                map(mouseY, horizon, height, green(s),green(d)), 
+                map(mouseY, horizon, height, blue(s), blue(d)));
+  }
+  
+  
+  let sun = color(255, hy*0.2+130,hy*0.25);
+  noStroke();
+
+  background(sky);
+  fill(sun);
+  circle(mouseX, mouseY, 40); 
 }
 
 class House{
