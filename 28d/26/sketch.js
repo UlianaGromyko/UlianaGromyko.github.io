@@ -4,7 +4,7 @@ let n, a, s, b, f;
 let t=0;
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(1790, 960);
   noCursor();
   stroke(0);
   fill(0);
@@ -13,7 +13,7 @@ function setup() {
   s = color(250,180,100); //sunset
   d = color('rgb(9,9,94)'); //dark
   
-  b = new Backdrop(70,100,40);
+  b = new Backdrop(70,100,100);
   f = new Backdrop(5,10,250);
   
   let index=0;
@@ -30,9 +30,9 @@ function setup() {
 
 function draw() {
   
-  drawSky();
-  b.display();
-  f.display();
+  let skycolor = drawSky();
+  b.display(skycolor, 2);
+  f.display(skycolor, 1);
   
   t++;
   if(t%3==1){
@@ -75,8 +75,8 @@ class Backdrop{
       this.count++;
     }
   }
-  display(){
-    stroke(0, this.opacity);
+  display(sky, z){
+    stroke(red(sky)-this.opacity, green(sky)-this.opacity, blue(sky)-this.opacity/z);
     strokeWeight(4);
     for(let i=0; i<this.h.length; i++){
       line(i*3-t/3, height, i*3-t/3, this.h[i]);
@@ -118,6 +118,8 @@ function drawSky(){
   background(sky);
   fill(sun);
   circle(mouseX, mouseY, 40); 
+  
+  return sky;
 }
 
 class House{
