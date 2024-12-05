@@ -45,7 +45,7 @@ class Particle {
 
   update() {
 
-    if(dist(this.pos.x, this.pos.y, mouseX, mouseY)<30){
+    if(dist(this.pos.x, this.pos.y, mouseX, mouseY)<90){
       let influence = createVector(movedX, movedY);
       influence.mult(10);  //the higher, the more powerful the influence 
       this.acc.add(influence);
