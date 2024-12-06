@@ -16,7 +16,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1790, 1160);
+  createCanvas(1790, 960);
   initiateWalls();
   noStroke();
   textAlign(CENTER, CENTER);
