@@ -14,6 +14,7 @@ function setup() {
     }
   }
   collumn = floor(height/space)+1;
+  noCursor();
 }
 
 function draw() {
