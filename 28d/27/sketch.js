@@ -1,113 +1,107 @@
-let margin = 20;
-let depth = 70;
-let facingWall=[];
-let backWall=[];
-let blocks=[];
-let a, b, bulb;
-let bulbSize = 100;
-let faceMesh;
-let video;
-let faces = [];
-let options = { maxFaces: 1, refineLandmarks: false, flipHorizontal: true };
+let p=[];
+let size = 100;
+let bounceX = 9;
+let bounceY = 9;
 
-function preload() {
-  // Load the faceMesh model
-  faceMesh = ml5.faceMesh(options);
-}
+// let font;
+let shown = true;
+
+let corners = 20;
+let lineheight =25;
+let tp = 5;
+let l=1;
 
 function setup() {
-  createCanvas(1790, 960);
-  initiateWalls();
-  noStroke();
-  textAlign(CENTER, CENTER);
-  
-  video = createCapture(VIDEO, {flipped: true});
-  video.size(width, height);
-  video.hide();
-  faceMesh.detectStart(video, gotFaces);
-  bulb = createVector(width/2, height/2);
+  createCanvas(1800, 900);
+  noCursor();
+  let count =0;
+  for(let i=0; i<width; i+=size){
+    for(let j=0; j<height; j+=size){
+      p[count] = new Cube(i,j);
+      count++;
+    }
+  }
 }
 
 function draw() {
-  background(10);
-  drawWalls();
-  for(let i=0; i<blocks.length; i++){
-    blocks[i].display();
+  for(let i=0; i<p.length; i++){
+    p[i].display();
   }
+  explain();
+}
+
+class Cube{
+  constructor(x,y){
+    this.home = createVector(x,y);
+    this.vel = createVector(0,0);
+  }
+  display(){
+    if(this.home.x<0){
+          this.vel.x = bounceX;
+        }else if(this.home.x>width-size){
+          this.vel.x = -bounceX;
+        }
+        
+        if(this.home.y<0){
+          this.vel.y = bounceY;
+        }else if(this.home.y>height-size){
+          this.vel.y = -bounceY;
+        }
     
-    for(let i=0; i<faces.length; i++){
-    bulb = createVector((faces[0].keypoints[159].x+
-                         faces[0].keypoints[386].x)/2,
-                        (faces[0].keypoints[386].y+
-                         faces[0].keypoints[159].y)/2);
-    bulbSize = floor(dist(faces[0].keypoints[159].x,
-                      faces[0].keypoints[159].y,
-                      faces[0].keypoints[386].x, 
-                      faces[0].keypoints[386].y)) /7;
+    this.home.add(this.vel);
+    this.vel.mult(0.99);
+    fill(255);
+    strokeWeight(1);
+    stroke(0);
+    rect(this.home.x, this.home.y, size,size,4);
+    
+    
+    if (this.home.x < mouseX && mouseX < this.home.x+size){
+      if (this.home.y < mouseY && mouseY < this.home.y+size){
+      
+        if(movedY>0){
+          this.vel.y++;
+        } else if(movedY<0){
+          this.vel.y--;
+        }
+
+        if(movedX>0){
+          this.vel.x++;
+        } else if(movedX<0){
+          this.vel.x--;
+        }
+        
+        
+      }
     }
-  
-    
-    noStroke();
-    fill(230);
-    circle(bulb.x, bulb.y, bulbSize);
-  for(let i=0; i<10; i++){
-    fill(200, 10);
-    circle(bulb.x, bulb.y, bulbSize*i);
   }
+}
+
+function explain(){
+
+   // textFont(font);
+    textAlign(LEFT, CENTER);
+  if (mouseIsPressed === true){
+    shown=false;
+    cursor(ARROW);
+  }
+  if(shown === true){
     
-  
-}
-
-function initiateWalls(){
-  facingWall[0] = createVector(margin, margin);
-  facingWall[1] = createVector(width-margin, margin);
-  facingWall[2] = createVector(width-margin, height-margin);
-  facingWall[3] = createVector(margin, height-margin);
-  
-  backWall[0] = createVector(facingWall[0].x+depth*2, facingWall[0].y+depth);
-  backWall[1] = createVector(facingWall[1].x-depth*2, facingWall[1].y+depth);
-  backWall[2] = createVector(facingWall[2].x-depth*2, facingWall[2].y-depth*2);
-  backWall[3] = createVector(facingWall[3].x+depth*2, facingWall[3].y-depth*2);
-}
-
-function drawWalls(){
-  let min = 0+bulbSize*0.09;
-  let max = 20+bulbSize*0.1;
-  let sensor = 200;
-  
-  
-  fill(map(dist(bulb.x, bulb.y, width/2, height/2), 0, sensor, max, min));
-  quad(backWall[0].x, backWall[0].y, 
-       backWall[1].x, backWall[1].y, 
-       backWall[2].x, backWall[2].y, 
-       backWall[3].x, backWall[3].y); //back wall
-  
-  fill(map(bulb.y, height/2, height/2+sensor, max, min));
-  quad(facingWall[0].x, facingWall[0].y, 
-       facingWall[1].x, facingWall[1].y, 
-       backWall[1].x, backWall[1].y, 
-       backWall[0].x, backWall[0].y); //ceiling
-  
-  fill(map(bulb.y, height/2, height/2+sensor, min, max));
-  quad(facingWall[3].x, facingWall[3].y, 
-       facingWall[2].x, facingWall[2].y, 
-       backWall[2].x, backWall[2].y, 
-       backWall[3].x, backWall[3].y);  // floor
-  
-  fill(map(bulb.x, width/2, width/2+sensor, min, max));
-  quad(backWall[2].x, backWall[2].y, 
-       backWall[1].x, backWall[1].y, 
-       facingWall[1].x, facingWall[1].y, 
-       facingWall[2].x, facingWall[2].y) //right wall
-  
-  fill(map(bulb.x, width/2, width/2+sensor, max, min));
-  quad(backWall[0].x, backWall[0].y, 
-       backWall[3].x, backWall[3].y, 
-       facingWall[3].x, facingWall[3].y, 
-       facingWall[0].x, facingWall[0].y) //left wall
-}
-
-function gotFaces(results) {
-  // Save the output to the faces variable
-  faces = results;
+    strokeWeight(2);
+    stroke(0);
+    
+    fill(0);
+    rect(mouseX+tp, mouseY+tp, 230, lineheight*l+40, 0, corners, corners, corners);
+    fill(204,255,10);
+    rect(mouseX, mouseY, 230, lineheight*l+40, 0, corners, corners, corners);
+    
+    textSize(20);
+    noStroke();
+    
+    fill(0);
+    text('feel free to:', mouseX+15, mouseY-10+tp, 300, 60);
+    l = 1;
+    text('move mouse', mouseX+15, mouseY+lineheight*l+tp, 300, 60);
+    l++;
+  }
 }

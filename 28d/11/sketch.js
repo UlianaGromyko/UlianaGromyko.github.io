@@ -1,74 +1,89 @@
-let video;
-let p=[];
+let pos;
+let target;
+let velocity;
+let spring = 0.05; // Spring stiffness, controls how strong the pull is back to the target
+let damping = 0.9; // Damping factor, controls how quickly the motion slows down
+
+// let font;
+let shown = true;
+
+let corners = 20;
+let lineheight =25;
+let tp = 5;
+let l=1;
 
 function setup() {
-  createCanvas(1790, 1160);
-  
-  textSize(20);
-  video = createCapture(VIDEO,{ flipped:true });
-  video.hide();
-  video.size(width,height);
-  textFont();
-  let index=0;
-  for(let i=0; i<width; i+=textSize()){
-    for(let j=0; j<height; j+=textSize()){
-      p[index] = new Char('&', i, j);
-      index++;
-    }
-  }
-  textSize(17);
+  createCanvas(1790 , 960);
+  noCursor();
+  pos = createVector(0,0); // Start at point A
+  target = createVector(mouseX, mouseY); // Target point B
+  velocity = createVector(0, 0); // Initial velocity
 }
 
 function draw() {
-  background(0);
-  fill(255);
-  stroke(255);
-  //noStroke();
-  video.loadPixels();
-  console.log(video.pixels[300]);
+  background(207,255,10);
+  target = createVector(mouseX, mouseY+100);
+
+  // Calculate the spring force
+  let force = p5.Vector.sub(target, pos);
+  force.mult(spring);
+
+  // Apply the force to the velocity
+  velocity.add(force);
+
+  // Apply damping to slow down over time
+  velocity.mult(damping);
+
+  // Update the position with the velocity
+  pos.add(velocity);
+
+  // Draw start, target, and the moving point
+  fill(0);
+  stroke(0);
+  bezier(0,0,pos.x,pos.y,pos.x,pos.y,width,0);
+  bezier(0,0,pos.x,pos.y,pos.x,pos.y,0,height);
+  bezier(width,0,pos.x,pos.y,pos.x,pos.y,width,height);
+  bezier(0,height,pos.x,pos.y,pos.x,pos.y,width,height);
   
-  for(let i=0; i<p.length; i++){
-    text(p[i].c , p[i].x, p[i].y);
-    p[i].update(video);
+  fill(207,255,10);
+  blendMode(DIFFERENCE);
+  if(shown != true){
+
+  circle(mouseX, mouseY, 50);
   }
   
+  blendMode(BLEND);
+  explain();
 }
 
-class Char{
-  constructor(c, x, y){
-    this.c = c;
-    this.x = x;
-    this.y = y; 
+function explain(){
+
+   // textFont(font);
+    textAlign(LEFT, CENTER);
+  if (mouseIsPressed === true){
+    shown=false;
   }
-  update(video){
-    let index = (this.y * video.width + this.x) * 4;
-    let r = video.pixels[index];
-    let g = video.pixels[index+1];
-    let b = video.pixels[index+2];
-    let w = (r+g+b)/7.65;
-    w=100-w;
-    if(w<10){ 
-      this.c = '@';
-    } else if(w<30){ 
-      this.c = '%';
-    } else if(w<40){ 
-      this.c = '#';
-    } else if(w<45){ 
-      this.c = '*';
-    } else if(w<50){ 
-      this.c = '+';
-    } else if(w<55){ 
-      this.c = '=';
-    } else if(w<60){ 
-      this.c = '-';
-    } else if(w<65){ 
-      this.c = ':';
-    } else if(w<80){ 
-      this.c = '.';
-    } else { 
-      this.c = '';
-    } 
+  if(shown === true){
     
+    strokeWeight(2);
+    stroke(0);
+    
+    fill(0);
+    rect(mouseX+tp, mouseY+tp, 230, lineheight*l+40, 0, corners, corners, corners);
+    fill(204,255,10);
+    rect(mouseX, mouseY, 230, lineheight*l+40, 0, corners, corners, corners);
+    
+    textSize(20);
+    noStroke();
+    
+    fill(0);
+    text('feel free to:', mouseX+15, mouseY-10+tp, 300, 60);
+    l = 1;
+    text('move mouse', mouseX+15, mouseY+lineheight*l+tp, 300, 60);
+    l++;
+    text('act out a dramatic', mouseX+15, mouseY+lineheight*l+tp, 300, 60);
+    l++;
+    text('monologue', mouseX+15, mouseY+lineheight*l+tp, 300, 60);
+    l++;
   }
 }
-

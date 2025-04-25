@@ -1,48 +1,87 @@
-let x=[];
-let y=[];
-let num = 20;
-let size=[];
-let count=0;
+
+let cols = 15;  // Number of columns
+let rows = 15;  // Number of rows
+let cellSize; // Size of each cell
+let spread = 60;
+
+// let font;
+let shown = true;
+
+let corners = 20;
+let lineheight =25;
+let tp = 5;
+let l=1;
+
+// function preload() {
+//   font = loadFont('Outfit-SemiBold.ttf');
+// }
 
 function setup() {
-  createCanvas(1790 , 300);
-  // noStroke();
-  strokeWeight(10);
+  createCanvas(1790 , 960);
+  cellSize = windowWidth / cols; // Assuming a square canvas
+
   noCursor();
-  fill(255);
-  stroke(0);
-  
-  for(let i=0; i<num; i++){
-    x[i] = 0;
-    y[i] = 0;
-    size[i] = 0;
+}
+
+function mouseClicked() {
+  if (spread < 200) {
+    spread = spread +50;
+  } else {
+    spread = 50;
   }
 }
 
 function draw() {
-  background(0);
-  circle(mouseX, height, 100);
+
+  background(255);
+
+  fill(0);
+  stroke(255);
+  strokeWeight(1);
+
   
-  
-  for(let i=0; i<num; i++){
-    if(random(0,100)>99 && y[i]<-50){
-      x[i] = mouseX+ random(-50, 50);
-      y[i] = height;
-      size[i] = random(10,80);
+  for (let i = 0; i < cols+1; i++) {
+    for (let j = 0; j < rows+1; j++) {
+      let x = i * cellSize ;
+      let y = j * cellSize ;
+      
+      let d = dist(x,y,mouseX,mouseY);
+      
+      rect(x-cellSize/2,y-cellSize/2,cellSize,cellSize, spread/(d/30));
+      
+      
     }
-    circle(x[i], y[i], size[i]);
-    y[i] -= 10;
+    
   }
   
-  fill(0);
-  stroke(250);
-  strokeWeight(2);
-  circle(mouseX, mouseY, 50);
-  fill(255);
-  stroke(0);
-  strokeWeight(10);
-
-  filter(BLUR,6);
-  filter(THRESHOLD, 0.1);
+  explain();
+  translate(cellSize/2, cellSize/2);
 }
 
+function explain(){
+
+   // textFont(font);
+    textAlign(LEFT, CENTER);
+  if (mouseIsPressed === true){
+    shown=false;
+  }
+  if(shown === true){
+    
+    strokeWeight(2);
+    stroke(0);
+    
+    fill(0);
+    rect(mouseX+tp, mouseY+tp, 230, lineheight*l+40, 0, corners, corners, corners);
+    fill(204,255,10);
+    rect(mouseX, mouseY, 230, lineheight*l+40, 0, corners, corners, corners);
+    
+    textSize(20);
+    noStroke();
+    
+    fill(0);
+    text('feel free to:', mouseX+15, mouseY-10+tp, 300, 60);
+    l = 1;
+    text('click & move mouse', mouseX+15, mouseY+lineheight*l+tp, 300, 60);
+    l++;
+  }
+}
