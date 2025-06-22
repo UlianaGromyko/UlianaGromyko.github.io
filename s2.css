@@ -10,6 +10,10 @@ body {
   background-color: #000;
   font-family: sans-serif;
   display: flex;
+
+  width: 100%;
+  overflow-x: hidden;
+
 }
 
 ::-moz-selection { /* Code for Firefox */
@@ -139,9 +143,48 @@ h2 {
 
 
 
+.single-video {
+  display: block; 
+  height: 70vh; 
+  width: 60vw; 
+  border: none; 
+  margin-left: 3vw;
+}
 
 
 /* Button row styling */
+
+.ASCII-button {
+  display: flex; /* enables flexbox */
+  flex-direction: column; /* stack children vertically */
+  justify-content: center; /* vertical centering */
+  align-items: center;
+
+  cursor: pointer;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-size: 4vw;
+  color: #cfff0a;
+  margin: 0px;
+  
+  background-color: transparent;
+  border-style: solid;
+  border-color: #cfff0a;
+  
+  border-width: 0.1vw;
+
+  height: 70vh; 
+  width: 31vw; 
+  margin-left: 3vw
+}
+
+.ASCII-button:hover{
+  background-color: #cfff0a;
+  color: #000;
+  font-weight: 300;
+}
+
         
 .video-button {
   cursor: pointer;
@@ -151,6 +194,7 @@ h2 {
   font-size: 1.3vw;
   color: #cfff0a;
   margin: 0px;
+  margin-right: 3vw;
   margin-top: -0.1vw;
   padding: 4vh 1vh 4vh 1vh;
   background-color: transparent;

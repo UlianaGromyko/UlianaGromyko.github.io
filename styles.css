@@ -137,7 +137,13 @@ h2 {
 }
 
 
-
+.single-video {
+  display: block; 
+  height: 70vh; 
+  width: 60vw; 
+  border: none; 
+  margin-left: 3vw;
+}
 
 
 
@@ -179,7 +185,6 @@ width: 100%;
 aspect-ratio: 16/9;
 display: none;
 border-radius: 8px;
-
 }
         
 .video-player.active {
