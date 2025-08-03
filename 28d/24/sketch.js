@@ -39,7 +39,7 @@ function draw() {
 
 function getTarget(){
   let a = floor(random(points.length));
-  return createVector(points[a].x-width/2, points[a].y-300);
+  return createVector(points[a].x-width/2+100, points[a].y+300);
 }
 
 function keyPressed(){
