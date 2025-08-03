@@ -11,7 +11,7 @@ function setup() {
   textSize(size);
   x = width/2;
   y = height/2-size;
-  points = font.textToPoints("a", x,y, size, 
+  points = font.textToPoints("type away!", x,y, size, 
                       { sampleFactor:  sf });
   
   noStroke();

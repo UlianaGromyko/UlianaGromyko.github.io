@@ -32,19 +32,31 @@ a {
   font-weight: 500;
 
 }
-h1 {
-  
-  font-size: 12vw;
-  line-height: 0.85; 
 
+h1 {
+  font-size: 12vw;
+  line-height: 0.85;
   font-family: "IBM Plex Mono", monospace;
   font-weight: 100;
-
   padding: 1vw;
   padding-bottom: 3vw;
   background-color: black;
   color: #cfff0a;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
 }
+
+h1 .subnote {
+  font-size: 1.2vw; 
+  font-weight: 100;
+  margin-left: auto;
+  align-self: flex-end;
+  color: #cfff0a; /* optional, inherits by default */
+  white-space: nowrap;
+}
+
 
 h2 {
   margin-top: 6vw;
