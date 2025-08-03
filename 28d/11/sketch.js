@@ -48,10 +48,10 @@ function draw() {
   
   fill(207,255,10);
   blendMode(DIFFERENCE);
-  if(shown != true){
+  //if(shown != true){
 
   circle(mouseX, mouseY, 50);
-  }
+  //}
   
   blendMode(BLEND);
   //explain();
