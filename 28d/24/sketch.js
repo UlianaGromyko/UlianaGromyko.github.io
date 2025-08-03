@@ -49,6 +49,7 @@ function keyPressed(){
       
       let b = size*25/word.length
       textSize(b)
+      textAlign(CENTER, CENTER);
       points = font.textToPoints(word, x,y, b, 
                           { sampleFactor:  sf });
       
