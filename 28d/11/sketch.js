@@ -54,7 +54,7 @@ function draw() {
   }
   
   blendMode(BLEND);
-  explain();
+  //explain();
 }
 
 function explain(){

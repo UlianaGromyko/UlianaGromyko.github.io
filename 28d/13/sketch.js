@@ -12,7 +12,8 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   textFont(font);
   textSize(30);
   frameRate(30);
