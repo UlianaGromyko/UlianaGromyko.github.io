@@ -1,60 +1,52 @@
-let v=[];
-let space=100;
+let points = [];
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   noFill();
-  noCursor();
-  stroke(0);
-  strokeWeight(5);
-  
-  let index=0;
-  for(let i=0; i<width; i+=space){
-    v[index] = new Thread(i, 0);
-    index++;
+  for (let i = 0; i < 50; i++) {
+    points.push({
+      x: random(width),
+      y: random(height),
+      vx: random(-1, 1),
+      vy: random(-1, 1)
+    });
   }
-  for(let i=0; i<height; i+=space){
-    v[index] = new Thread(width, i);
-    index++;
-  }
-  for(let i=0; i<width; i+=space){
-    v[index] = new Thread(width-i, height);
-    index++;
-  }
-  for(let i=0; i<height; i+=space){
-    v[index] = new Thread(0, height-i);
-    index++;
-  }
-  
+  stroke(200);
 }
 
 function draw() {
-  background(220,20,20,96);
-  for(let i=0; i<v.length; i++){
-    v[i].update(mouseX, mouseY);
-    v[i].display();
-  }
-}
+  background(20);
 
-class Thread{
-  constructor(x,y){
-    this.a = createVector(x,y);
-    this.b = createVector(x+(width-x)/2, y+(height-y)/2);
-    this.c = createVector(0,0);
-  }
-  update(mx, my){
-    this.c = createVector(this.a.x+(mx-this.a.x)/1.2, 
-                          this.a.y+(my-this.a.y)/1.2);
+  for (let i = 0; i < points.length; i++) {
+    let p = points[i];
+
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > width) p.vx *= -1;
+    if (p.y < 0 || p.y > height) p.vy *= -1;
     
-    let diff = createVector(this.c.x-this.b.x, 
-                            this.c.y-this.b.y);
-    diff.mult(0.05);
-    this.b.add(diff);
-  }
-  display(){
-    bezier(this.a.x, this.a.y,
-          this.b.x, this.b.y,
-          this.b.x, this.b.y,
-          mouseX, mouseY);
+    //ellipse(p.x, p.y, 5);
+
+    let distances = [];
+    for (let j = 0; j < points.length; j++) {
+      if (i !== j) {
+        let d = dist(p.x, p.y, points[j].x, points[j].y);
+        distances.push({ index: j, distance: d });
+      }
+    }
+
+    distances.sort((a, b) => a.distance - b.distance);
+      
+      let closest1 = points[distances[0].index];
+      let closest2 = points[distances[1].index];
+      let closest3 = points[distances[2].index];
+      
+      line(p.x, p.y, closest1.x, closest1.y);
+      line(p.x, p.y, closest2.x, closest2.y);
+      line(p.x, p.y, closest3.x, closest3.y);
+      
+    
   }
 }

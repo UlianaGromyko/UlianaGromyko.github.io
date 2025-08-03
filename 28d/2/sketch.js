@@ -3,7 +3,8 @@ let ov = 255;
 let p =[];
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
 }
 
 function draw() {

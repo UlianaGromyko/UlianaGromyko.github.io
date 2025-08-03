@@ -17,7 +17,8 @@ let l=1;
 // }
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   cellSize = windowWidth / cols; // Assuming a square canvas
 
   noCursor();
@@ -54,7 +55,6 @@ function draw() {
     
   }
   
-  explain();
   translate(cellSize/2, cellSize/2);
 }
 

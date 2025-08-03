@@ -4,7 +4,8 @@ let n, a, s, b, f;
 let t=0;
 
 function setup() {
-  createCanvas(1790, 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   noCursor();
   stroke(0);
   fill(0);

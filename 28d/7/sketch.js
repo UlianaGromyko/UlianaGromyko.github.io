@@ -1,61 +1,64 @@
-let p=[];
-let detail=50;
-let index=0;
-let chaos=20;
-let maxCount;
-let r = 300;
+
+
+
+let seedPoints = [];
+let delaunay, voronoi;
 
 function setup() {
-  createCanvas(1790,960);
-  fill(255);
-  stroke(100);
-  noCursor();
-  
-  for(let i=0; i<width; i+=detail){
-    for(let j=0; j<height; j+=detail){
-      p[index] = new Bleh(random(i, i+detail/chaos), random(j, j+detail/chaos), i/detail, j/detail, r/2);
-      index++;
-    }
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
+  for (let i = 0; i < 70; i++) {
+    seedPoints[i] = createVector(random(width), random(height));
   }
-  maxCount = createVector(width/detail, height/detail);
-  console.log(maxCount);
-  console.log(p[p.length-1].count);
+  
+  noCursor();
 }
 
 function draw() {
-  background(0);
-  
-  circle(mouseX, mouseY, r);
-  for(let i=0; i<p.length; i++){
-    p[i].display();
-    
-    if(p[i].count.y < maxCount.y-1){
-      line(p[i].pos.x, p[i].pos.y, 
-           p[i+1].pos.x,  p[i+1].pos.y);
-    }
-    if(p[i].count.x < maxCount.x-1){
-      line(p[i].pos.x, p[i].pos.y, 
-           p[i+floor(maxCount.y)+1].pos.x, 
-           p[i+floor(maxCount.y)+1].pos.y);
-    }
-  }
-}
+  background(20);
+  seedPoints[0] = createVector(mouseX, mouseY);
+  delaunay = calculateDelaunay(seedPoints);
 
-class Bleh{
-  constructor(x,y,a,b,radius){
-    this.pos = createVector(x,y);
-    this.orgin = createVector(x,y);
-    this.count = createVector(a,b);
-    this.r = radius
+  
+  noFill();
+  noStroke();
+ // stroke(150, 0, 50, 50);
+  strokeWeight(1);
+  // jeweils 3 punkte hintereinander geben ein delaunay-triangle.
+  // Ist aus d3.js-library
+  
+  console.log(delaunay.triangles);
+  
+  let { points, triangles } = delaunay;
+  for (let i = 0; i < triangles.length; i += 3) {
+    let a = 2 * delaunay.triangles[i];
+    let b = 2 * delaunay.triangles[i + 1];
+    let c = 2 * delaunay.triangles[i + 2];
+    triangle(
+      points[a],
+      points[a + 1],
+      points[b],
+      points[b + 1],
+      points[c],
+      points[c + 1]
+    );
   }
-  display(){
-    if(dist(mouseX, mouseY, this.pos.x, this.pos.y)<this.r){
-      this.pos = createVector(this.orgin.x, this.orgin.y);
-    }else if(random(100)<5){
-      let w=8;
-      this.pos.add(random(-w,w), random(-w,w));
-      
-      circle(this.pos.x, this.pos.y, 5);
-    }
+  
+  let voronoi = delaunay.voronoi( [0, 0, width, height] );
+  let polygons = voronoi.cellPolygons();
+  for(let poly of polygons) {
+    beginShape();
+    stroke(200);
+      for (let i = 0; i < poly.length; i++) {
+      vertex(poly[i][0], poly[i][1]);
+      }
+    endShape();
+  } 
+}
+function calculateDelaunay(points) {
+  let pointsArray = [];
+  for (let v of points) {
+    pointsArray.push(v.x, v.y);
   }
+  return new d3.Delaunay(pointsArray);
 }

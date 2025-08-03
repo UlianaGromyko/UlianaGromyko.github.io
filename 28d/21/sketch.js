@@ -4,7 +4,8 @@ let collumn;
 let untouched = true;
 
 function setup() {
-  createCanvas(1790, 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   let index=0;
   noStroke();
   for(let i=-space; i<width+space; i+=space){

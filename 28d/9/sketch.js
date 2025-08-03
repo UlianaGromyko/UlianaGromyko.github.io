@@ -3,7 +3,8 @@ let room = 20;
 let capture;
 
 function setup() {
-  createCanvas(1790, 1160);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   for(let i=0; i<width; i+=room){
     for(let j=0; j<height; j+=room){
       p.push(new Particle(i, j, room));

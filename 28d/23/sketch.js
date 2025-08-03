@@ -13,7 +13,8 @@ let count;
 let countOld;
 
 function setup() {
-  createCanvas(1790, 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   strokeWeight(gap/2);
   bg = color(200,200,200);
   let orgin = createVector(width / 2 - 50, height / 2 - 50);

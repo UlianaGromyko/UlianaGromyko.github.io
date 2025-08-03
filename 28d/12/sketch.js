@@ -13,7 +13,8 @@ let l=1;
 
 
 function setup() {
-  createCanvas(1790,960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   fill(0);
   noStroke();
   noCursor();
@@ -48,7 +49,6 @@ function draw() {
     p[i].display();
   }
 
-  explain();
 }
 
 class Particle {

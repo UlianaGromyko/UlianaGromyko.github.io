@@ -1,79 +1,101 @@
-let p = [];
-let space = 50;
-let interval = 20;
-let t = 0;
-let size = 25;
+let font, points=[], x,y, size = 100, g=[], sf=0.5, word="";
+
+function preload(){
+  font = loadFont("AzeretMono-ExtraBold.ttf");
+}
 
 function setup() {
-  createCanvas(1790, 960);
-  fill(200, 20, 20);
-  strokeWeight(3);
-  stroke(0);
-  p[0] = new Thing(width / 2, height / 2);
-
-  background(200, 20, 30);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
+  textAlign(CENTER, CENTER);
+  textSize(size);
+  x = width/2;
+  y = height/2-size;
+  points = font.textToPoints("a", x,y, size, 
+                      { sampleFactor:  sf });
+  
+  noStroke();
+  
+  for(let i=0; i<1000; i++){
+    g[i] = new Kiki();
+  }
+  fill(20)
 }
 
 function draw() {
-  t++;
-  for (let i = 0; i < p.length; i++) {
-    p[i].display();
+  
+  textSize(20)
+  
+  background(200);
+  // for (let p of points){
+  //   point(p.x, p.y);
+  // }
+  text(word, width/2 , 200)
+  for(let c of g){
+    c.display();
   }
+  
+}
 
-  if (t == interval) {
-    background(200, 20, 20, 30);
-    let a = floor(random(p.length));
-    p.push(new Thing(p[a].pos.x, p[a].pos.y));
-    for (let i = 0; i < p.length; i++) {
-      p[i].run();
-      if (p[i].outside()) {
-        p.splice(i, 1);
+function getTarget(){
+  let a = floor(random(points.length));
+  return createVector(points[a].x,points[a].y);
+}
+
+function keyPressed(){
+  
+  if(keyCode == ENTER){
+    if (word != "") {
+      
+      let b = size*25/word.length
+      textSize(b)
+      points = font.textToPoints(word, x,y, b, 
+                          { sampleFactor:  sf });
+      
+    } 
+      
+      
+      for(let c of g){
+        c.target = getTarget();
       }
-    }
-    t = 0;
+      word="";
+      
+  } else if(keyCode == SHIFT){
+  } else if(keyCode == BACKSPACE) {
+    word = word.slice(0, word.length-1);
+  } else {
+    word += key;
   }
 }
 
-function mouseClicked() {
-  interval += 5;
-  size = (size / 5) * 4;
-  background(200, 20, 20);
-}
+// function mouseClicked(){
+//   if(fullscreen() != true) fullscreen(true);
+// }
 
-class Thing {
-  constructor(x, y) {
-    this.pos = createVector(x, y);
-    this.before = createVector(x, y);
+class Kiki{
+  constructor(){
+    this.pos = createVector(random(width), random(height));
+    this.target = getTarget();
+    this.speed = random(0.01, 0.2);
+    this.size = floor(random(1, 10));
   }
-  display() {
-    let x = map(t, 0, interval, this.before.x, this.pos.x);
-    let y = map(t, 0, interval, this.before.y, this.pos.y);
-    //line(this.pos.x, this.pos.y, this.before.x, this.before.y);
-    circle(x, y, size);
+  display(){
+    
+    //strokeWeight(this.size);
+    
+    
+    circle(this.pos.x, this.pos.y, this.size)
+    
+    //line(this.pos.x, this.pos.y, 
+    //this.target.x, this.target.y)
+    
+    this.run();
+    
   }
-  run() {
-    let angle = floor(random(6));
-
-    let n = createVector(cos(angle*PI/3)*space, sin(angle*PI/3)*space);
-    console.log(n.x);
-    n.add(this.pos);
-    this.before = this.pos.copy();
-    this.pos = n.copy();
+  run(){
+    this.pos = p5.Vector.lerp(this.pos, 
+                              this.target, 
+                              this.speed)
   }
-  outside() {
-    if (
-      (this.pos.x < 0 ||
-        this.pos.x > width ||
-        this.pos.y < 0 ||
-        this.pos.y > height) &&
-      (this.before.x < 0 ||
-        this.before.x > width ||
-        this.before.y < 0 ||
-        this.before.y > height)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  
 }

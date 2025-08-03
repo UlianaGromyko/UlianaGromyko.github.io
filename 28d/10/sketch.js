@@ -3,7 +3,8 @@ let p=[];
 let e;
 
 function setup() {
-  createCanvas(1790, 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   //noStroke();
   stroke(210);
   noCursor();

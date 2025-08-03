@@ -13,7 +13,8 @@ let tp = 5;
 let l=1;
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   noCursor();
   pos = createVector(0,0); // Start at point A
   target = createVector(mouseX, mouseY); // Target point B

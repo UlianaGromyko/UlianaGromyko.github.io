@@ -4,7 +4,8 @@ let l = 30;
 let t=0;
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   for(let i=0; i<l; i++){
     a[i] = createVector(0,0);
     b[i] = createVector(0,0);

@@ -9,7 +9,10 @@ let hypocenter;
 let c;
 
 function setup() {
-  createCanvas(1760,960);
+  let w = screen.availHeight - 170 - ((screen.availHeight - 170)%detail);
+
+  createCanvas(screen.availWidth - 2,   
+               w);
   c = color(10,210,10);
   fill(c);
   stroke(c);

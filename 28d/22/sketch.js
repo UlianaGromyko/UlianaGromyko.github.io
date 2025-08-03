@@ -11,7 +11,8 @@ let tp = 5;
 let l=1;
 
 function setup(){
-	createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
 	p[0] = new Branch(width/2, height/2);
   
 	background(200);
@@ -42,7 +43,7 @@ function draw(){
       
       
 	}
-	explain();
+	
 	
 }
 

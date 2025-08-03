@@ -1,217 +1,104 @@
-let p = [];
-let room = 70;
-let x = room;
-let y = room;
+// sound from https://freesound.org/people/ironcross32/packs/32802/
 
-let influence;
-let stiffness;
-let pullback;
+let stage="¶@§$%#&84AG0‡©CV7✓khgj±i?!†l1\|/<>oc*=+~-;:•®™°,.";
+let font;
+let g=0;
+let arr=[];
+let mySound2;
 
-let baseline = 40;
-
-// let font;
-let shown = true;
-
-let corners = 20;
-let lineheight =25;
-let tp = 5;
-let l=1;
+function preload(){
+  font = loadFont("IBMPlexMono-Light.ttf");
+  mySound2 = loadSound('purr.wav');
+}
 
 function setup() {
-  createCanvas(1790,960);
-  fill(255);
-  //noCursor();
-
-  influence = createSlider(0.05, 2, 0.5, 0.05);
-  pullback = createSlider(0, 0.3, 0.1, 0.01);
-  stiffness = createSlider(0.9, 1, 0.99, 0.005);
-
-  influence.addClass("mySliders");
-  pullback.addClass("mySliders");
-  stiffness.addClass("mySliders");
-
-
-
-  influence.position(10, baseline);
-  influence.size(250);
-  pullback.position(10, baseline+30);
-  pullback.size(250);
-  stiffness.position(10, baseline+60);
-  stiffness.size(250);
-
-
-
-  for (i = 0; i < (width * height) / sq(room - 1); i++) {
-    p.push(new Particle(x, y, i));
-
-    if (x < width - room) {
-      x += room;
-      
-    } else {
-      y += room;
-      x = room;
-
-    }
-  }
+  createCanvas(800, 800);
+  textFont(font);
+  textSize(30);
+  frameRate(30);
+  
+  fill(50);
+  noStroke();
+  noCursor();
 }
 
 function draw() {
-  background(0);
-  noCursor();
-
-
-
-  for (i = 0; i < (width * height) / sq(room - 1); i++) {
-    p[i].update(influence.value(), pullback.value(), stiffness.value());
-    if(mouseIsPressed){
-      p[i].update(2, 0, stiffness.value());
+  background(200);
+  
+  fill(50);
+  for(let i=0; i<arr.length; i++){
+    arr[i].run();
+    arr[i].multiply(10);
+    
+    if(arr[i].pos.length<1){
+      arr.splice(i,1);
     }
-
-    p[i].display();
   }
-
-  fill(0);
-  strokeWeight(1.5);
-  stroke(255);
-  rect(20,25,430, 105, 10);
-
-  fill(255);
-  noStroke();
-  textFont('Courier New', 20);
-
-
-  text("influence", 320, baseline +15);
-  text("pullback", 320, baseline +45);
-  text("stiffness", 320, baseline +75);
-
-
-  fill(0);
-  strokeWeight(2);
-  stroke(255);
-  //circle(mouseX, mouseY, 20);
-  //rect(mouseX-10, mouseY-10, 20, 20, 10);
-
-  line(mouseX+10,mouseY+10,mouseX-10,mouseY-10);
-  line(mouseX-10,mouseY+10,mouseX+10,mouseY-10);
-
-explain();
+  fill(200,20,20);
+  text("*", mouseX, mouseY);
 }
 
-class Slider {
-  constructor(min, max, name, count) {
-
-    this.min = min;
-    this.max = max;
-    this.name = name;
-    this.count = count;
-
-    this.start = 20;
-    this.end = 100;
-    this.margin = 20;
-
-  }
-
-  update() {
-
-    if( mouseIsPressed == true()){
-
-    }
-
-
-
-  }
-
-  display() {
-
-
-    rect(this.start/2 ,this.margin*5*count, this.start*1.5+this.end ,this.margin*4);
-    line(this.start, this.count, this.end, this.count);
-
-
-
-
-
-  }
-
-  value(){
-    return value;
-  }
+function mouseClicked(){
+  arr.push(new Flame(mouseX, mouseY));
+  mySound2.play();
+  
 }
 
-class Particle {
-
-  constructor(x, y, time) {
-    this.pos = createVector(x, y);
-    this.vel = createVector(0, 0);
-    this.acc = createVector(0, 0);
-    this.orgin = createVector(x,y);
-    this.thickness = 10;
-
+class Flame{
+  constructor(x,y){
+    this.pos = [];
+    this.pos[0] = createVector(x, y);
+    this.vel = [];
+    this.vel[0] = createVector(0,0);
+    this.orgin = createVector(x, y);
+    this.letter = [];
+    this.letter[0] = round(random(stage.length));
+    this.boom = round(random(10,30));
   }
-
-  update(influenceValue, pullbackValue, stiffnessValue) {
-
-    
-
-      let influence = createVector(movedX, movedY);
-      influence.mult(influenceValue);  //the higher, the more powerful the influence 0.5
-    
-
-      this.acc.add(influence);
-       this.acc.div(dist(pmouseX, pmouseY, this.pos.x, this.pos.y));
+  multiply(cap){
+    if (this.boom>0) {
+      let i = floor(random(this.pos.length));
+      let a = 10;
+      this.pos.push(createVector(
+        this.pos[0].x+random(-a,a),
+        this.pos[0].y+random(-a,a)));
       
-
-      let pullback = createVector(this.orgin.x - this.pos.x, this.orgin.y - this.pos.y );
-      pullback.mult(pullbackValue); // 0.1
-
-      this.vel.add(this.acc);
-      this.vel.mult(stiffnessValue);   // the lower, the stiffer, the quicker stabilisation 1 ti 0.9
-
-
-
-    this.pos.add(this.vel);
-    this.pos.add(pullback);
+      this.vel.push(createVector(
+        random(-a,a),random(-a,a)));
+      
+      this.letter.push(round(random(stage.length)));
+      
+      this.boom--;
+    }
   }
+  run(){
+    for(let i=0; i<this.pos.length; i++){
+      
+      if(this.letter[i]<stage.length){
+      
+        text(stage.charAt(this.letter[i]), 
+             this.pos[i].x, this.pos[i].y);
+        
+        this.pos[i] = otherSideReturn(this.pos[i]);
 
-  display() {
-    stroke(200);
-    strokeWeight(this.thickness);
-    line(this.pos.x, this.pos.y, this.orgin.x, this.orgin.y);
-
-
-    stroke(0);
-    strokeWeight(this.thickness-4);
-    line(this.pos.x, this.pos.y, this.orgin.x, this.orgin.y);
+        this.pos[i].add(this.vel[i]);
+        this.vel[i].mult(random(0.8, 0.99));
+        
+        if(random(10)<3) this.letter[i] = round(random(this.letter[i], stage.length));
+      } else if(i!=0 || this.boom<1){
+        this.pos.splice(i,1);
+        this.vel.splice(i,1);
+        this.letter.splice(i,1);
+      }
+    }
   }
 }
 
-function explain(){
-
-   // textFont(font);
-    textAlign(LEFT, CENTER);
-  if (mouseIsPressed === true){
-    shown=false;
-    cursor(ARROW);
-  }
-  if(shown === true){
-    
-    strokeWeight(2);
-    stroke(0);
-    
-    fill(0);
-    rect(mouseX+tp, mouseY+tp, 230, lineheight*l+40, 0, corners, corners, corners);
-    fill(204,255,10);
-    rect(mouseX, mouseY, 230, lineheight*l+40, 0, corners, corners, corners);
-    
-    textSize(20);
-    noStroke();
-    
-    fill(0);
-    text('feel free to:', mouseX+15, mouseY-10+tp, 300, 60);
-    l = 1;
-    text('click & move', mouseX+15, mouseY+lineheight*l+tp, 300, 60);
-    l++;
-    text('adjust sliders', mouseX+15, mouseY+lineheight*l+tp, 300, 60);
-    l++;
-  }
+function otherSideReturn(v){
+  if     (v.x < 0) v.x = width;
+  else if(v.y < 0) v.y = height;
+  if     (v.x > width)  v.x = 0;
+  else if(v.y > height) v.y = 0;
+  
+  return v;
 }

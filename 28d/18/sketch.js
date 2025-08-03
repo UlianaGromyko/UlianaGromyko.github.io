@@ -5,7 +5,8 @@ let maxP = 1000;
 
 
 function setup(){
-	createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
 	weight = random(30,40);
 	p[0] = new Branch(width/2, height/2, weight);
   

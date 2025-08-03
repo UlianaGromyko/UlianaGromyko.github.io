@@ -3,7 +3,8 @@ let angle1, angle2;
 
 
 function setup() {
-  createCanvas(1790, 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   button1 = new Button(width/2+100, height/2+100);
   button2 = new Button(width/2+400, height/2+100);
 }

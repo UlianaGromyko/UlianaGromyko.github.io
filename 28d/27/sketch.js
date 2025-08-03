@@ -12,8 +12,12 @@ let tp = 5;
 let l=1;
 
 function setup() {
-  createCanvas(1800, 900);
-  noCursor();
+  let h = screen.availHeight - 170 - ((screen.availHeight - 170)%size)+size;
+  let w = screen.availWidth - 2 - ((screen.availWidth - 2)%size)+size;
+
+  createCanvas(w,   
+               h);
+  //noCursor();
   let count =0;
   for(let i=0; i<width; i+=size){
     for(let j=0; j<height; j+=size){
@@ -27,7 +31,7 @@ function draw() {
   for(let i=0; i<p.length; i++){
     p[i].display();
   }
-  explain();
+  
 }
 
 class Cube{

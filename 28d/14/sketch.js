@@ -6,7 +6,8 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   let index=0;
   for(let i=-width; i<width*2; i+=space){
     for(let j=-height; j<height*2; j+=space){

@@ -4,7 +4,8 @@ let space =30;
 let fspace =100;
 
 function setup() {
-  createCanvas(1790 , 960);
+  createCanvas(screen.availWidth - 2,   
+               screen.availHeight - 170);
   noStroke();
   noCursor();
   let index =0;
