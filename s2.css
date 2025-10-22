@@ -72,6 +72,25 @@ h2 {
 
 }
 
+
+.description{
+  display: flex; 
+  flex-direction: column;
+  /*align-content: space-between;*/
+  justify-content: space-between;
+  /*height: 100%; */
+  width: 60vw; 
+  height: 70vh; 
+  border: none; 
+  margin-left: 3vw;
+
+  text-align: left;
+  color: #cfff0a;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-size: 2vw;
+}
+
 .challenge-row {
   display: flex;
   width: 99vw;
