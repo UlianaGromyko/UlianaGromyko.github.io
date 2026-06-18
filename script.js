@@ -14,31 +14,31 @@ document.querySelectorAll('.card').forEach(card => {
 
 
 
-    const colors = [
-      '#c37b85',
-      '#e34214',
-      '#107471',
-      '#4436ee',
-      '#434542',
-      '#4b7792',
-      '#797595',
-      '#355a65',
-      '#b286f7',
-      '#758627',
-      '#707c94',
-      '#f73f2e',
-      '#2375f2',
-      '#84816c',
-      '#ec711d',
-      '#150f85',
-      '#073b43',
-      '#370cad',
-      '#0c363b'
-    ];
+    // const colors = [
+    //   '#c37b85',
+    //   '#e34214',
+    //   '#107471',
+    //   '#4436ee',
+    //   '#434542',
+    //   '#4b7792',
+    //   '#797595',
+    //   '#355a65',
+    //   '#b286f7',
+    //   '#758627',
+    //   '#707c94',
+    //   '#f73f2e',
+    //   '#2375f2',
+    //   '#84816c',
+    //   '#ec711d',
+    //   '#150f85',
+    //   '#073b43',
+    //   '#370cad',
+    //   '#0c363b'
+    // ];
 
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    // const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-    document.documentElement.style.setProperty('--primary-bg-color', randomColor );
+    // document.documentElement.style.setProperty('--primary-bg-color', randomColor );
 
 
 
