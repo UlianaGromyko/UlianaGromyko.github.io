@@ -70,7 +70,7 @@ h1 {
 .hover-word img {
     position: absolute;
     left: 50%;
-    bottom: 150%;
+    bottom: 100%;
 
     width: 550px;
     height: auto;

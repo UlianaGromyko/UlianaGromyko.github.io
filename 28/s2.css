@@ -1,0 +1,279 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  /* background-color: #cfff0a; /* toxic green */
+  background-color: #000;
+  font-family: sans-serif;
+  display: flex;
+
+  width: 100%;
+  overflow-x: hidden;
+
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: #000;
+  background: #cfff0a;
+}
+
+::selection {
+  color: #000;
+  background: #cfff0a;
+}
+
+a {
+  text-decoration: none;
+  color: #cfff0a;
+  font-weight: 500;
+
+}
+
+h1 {
+  font-size: 12vw;
+  line-height: 0.85;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  padding: 1vw;
+  padding-bottom: 3vw;
+  background-color: black;
+  color: #cfff0a;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+h1 .subnote {
+  font-size: 1.2vw; 
+  font-weight: 100;
+  margin-left: auto;
+  align-self: flex-end;
+  color: #cfff0a; /* optional, inherits by default */
+  white-space: nowrap;
+}
+
+
+h2 {
+  margin-top: 6vw;
+  font-size: 2vw;
+  line-height: 1.15; 
+
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+
+  padding: 1vw;
+  padding-bottom: 3vw;
+  color: #cfff0a;
+
+}
+
+
+.description{
+  display: flex; 
+  flex-direction: column;
+  /*align-content: space-between;*/
+  justify-content: space-between;
+  /*height: 100%; */
+  width: 60vw; 
+  height: 70vh; 
+  border: none; 
+  margin-left: 3vw;
+
+  text-align: left;
+  color: #cfff0a;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-size: 2vw;
+}
+
+.challenge-row {
+  display: flex;
+  width: 99vw;
+  overflow-x: auto;
+}
+
+.bullet {
+  flex: 1;
+  min-width: 13vw;
+/*  aspect-ratio: 1 / 0.7;*/
+  height: 17vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  color: #cfff0a;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-size: 2vw;
+  text-decoration: none;
+  border: 0.1vw solid #cfff0a;
+}
+
+.bullet:hover {
+  background-color: #cfff0a;
+  color: black;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  align-content: stretch;
+  height: 68vh;
+}
+
+
+.intro_text {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-size: 1.3vw;
+  text-decoration: none;
+  color: #cfff0a;
+  margin: 0px;
+  margin-top: -0.1vw;
+  padding: 1vw;
+  border-style: solid;
+  border-color: #cfff0a;
+  border-width: 0.1vw;
+  text-align: left;
+
+}
+
+.intro_text:hover{
+  color: #000;
+  background-color: #cfff0a;
+}
+
+.info-section button:hover{
+  color: #000;
+  background-color: #cfff0a;
+
+}
+
+
+
+.showreels {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.modal {
+  max-width: 65vw;
+}
+
+.sections {
+  width: 99;
+  height: 100vh;
+}
+
+
+
+
+.single-video {
+  display: block; 
+  height: 70vh; 
+  width: 60vw; 
+  border: none; 
+  margin-left: 3vw;
+}
+
+
+/* Button row styling */
+
+.ASCII-button {
+  display: flex; /* enables flexbox */
+  flex-direction: column; /* stack children vertically */
+  justify-content: center; /* vertical centering */
+  align-items: center;
+
+  cursor: pointer;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-size: 4vw;
+  color: #cfff0a;
+  margin: 0px;
+  
+  background-color: transparent;
+  border-style: solid;
+  border-color: #cfff0a;
+  
+  border-width: 0.1vw;
+
+  height: 70vh; 
+  width: 31vw; 
+  margin-left: 3vw
+}
+
+.ASCII-button:hover{
+  background-color: #cfff0a;
+  color: #000;
+  font-weight: 300;
+}
+
+        
+.video-button {
+  cursor: pointer;
+  text-align: left;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-size: 1.3vw;
+  color: #cfff0a;
+  margin: 0px;
+  margin-right: 3vw;
+  margin-top: -0.1vw;
+  padding: 4vh 1vh 4vh 1vh;
+  background-color: transparent;
+  border-style: solid;
+  border-color: #cfff0a;
+  border-radius: 10 px;
+  border-width: 0.1vw;
+}
+        
+.video-button.active {
+color: #000;
+background-color: #cfff0a;
+font-weight: 500;
+}
+        
+/* Video container styling */
+.video-container {
+width: 65vw;
+margin: 0 2vw 0;  
+min-height: 450px; /* Prevents layout shift when changing videos */          
+align-self: center;
+}
+        
+.video-player {
+width: 100%;
+aspect-ratio: 16/9;
+display: none;
+border-radius: 8px;
+
+}
+        
+.video-player.active {
+  display: block;
+}
+        
+/* Placeholder when no video selected */
+.video-placeholder {
+display: flex;
+align-items: center;
+justify-content: center;
+
+background: #000;
+color: #cfff0a;
+font-family: "IBM Plex Mono", monospace;
+font-weight: 100;
+font-size: 1.3vw;
+
+width: 100%;
+aspect-ratio: 16/9;
+border-radius: 8px;
+}

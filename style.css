@@ -8,17 +8,22 @@ body {background: var(--primary-bg-color);}
 
 span {
   color: #fff;
-  font-size: 50px;
+  font-size: 30px;
   text-align: center;
   
   font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500;
+  font-weight: 300;
   font-style: normal;
 }
 
+.credit {
+  font-weight: 800;
+  margin-left: 4rem;
+}
+
 .text {
-  text-align: center;
+  text-align: justify;
   padding: 50px;
 }
 
@@ -29,7 +34,7 @@ span {
   
   justify-self: center;
   align-content: center;
-
+  overflow: hidden;
 }
 
 

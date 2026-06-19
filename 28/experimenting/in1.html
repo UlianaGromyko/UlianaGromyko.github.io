@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minimal Portfolio</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      display: grid;
+      grid-template-rows: 1fr auto; /* main block / contact */
+      height: 100vh;
+    } height: 100vh;
+    }
+
+    body {
+      display: grid;
+      grid-template-rows: auto 1fr auto; /* nav / project / contact */
+    }
+
+    /* =====================
+       MAIN BLOCK STRUCTURE
+       ========.main {
+      display: grid;
+      grid-template-columns: 22rem 1fr auto; /* side / display / details */
+      height: 100%;
+      align-items: stretch;
+    }ight: 100%;
+      align-items: stretch;
+    }
+
+    /* -.side-block {
+      display: grid;
+      grid-template-rows: auto 1fr; /* nav / project text */
+      height: 100%;
+    }ows: auto 1fr; /* nav / project nav {
+      display: flex;
+      gap: 2rem;
+      padding: 1rem;
+      align-items: flex-start;
+      height: auto;
+    }em;
+      align-items: flex-start;
+      overflow: visible;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: inherit;
+      transform: rotate(-90deg);
+      transform-origin: bottom left;
+      white-space: nowrap;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* 1a.2 Project text */
+    .project-text {
+      align-self: end;
+      padding: 1rem;
+      max-width: 40ch;
+    }
+
+    /* ----- 1b. Project display ----- */
+    .project-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border: solid;
+    }
+
+    .project-display::after {
+      content: "project display";
+    }
+
+    /* ----- 1c. Project details ----- */
+    .project-details {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem;
+
+      transform: rotate(90deg);
+      transform-origin: center;
+    }
+
+    .project-details span {
+      white-space: nowrap;
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    /* =====================
+       3. CONTACT INFO
+       ===================== */
+    footer {
+      display: flex;
+      justify-content: space-around;
+      gap: 2rem;
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+    <!-- 1. MAIN BLOCK -->
+  <section class="main">
+
+    <!-- 1a. Sub block -->
+    <div class="side-block">
+      <!-- 1a.1 Navigation -->
+      <nav>
+        <a>Project One</a>
+        <a>Project Two</a>
+        <a>Project Three</a>
+      </nav>
+
+      <!-- 1a.2 Project text -->
+      <div class="project-text">
+        <p>
+          This project explores minimal interfaces and structural imbalance.
+          Text replaces imagery, orientation replaces hierarchy.
+        </p>
+      </div>
+    </div>
+
+    <!-- 1b. Project display -->
+    <div class="project-display"></div>
+
+    <!-- 1c. Project details -->
+    <div class="project-details">
+      <span>2025</span>
+      <span>Creative Coding</span>
+      <span>Experimental Design</span>
+    </div>
+
+  </section>
+
+  <!-- 2. Contact info -->
+  <footer>
+    <a href="mailto:you@email.com">you@email.com</a>
+    <a href="#">Instagram</a>
+    <a href="#">Are.na</a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Jacquard+12&family=Jacquarda+Bastarda+9&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minimal Portfolio</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      overflow: hidden; /* non-scrollable */
+      
+      background: #ddc;
+      color: darkred;
+      /*font-family: "IBM Plex Mono", monospace; font-weight: 300;*/
+      font-family: "JetBrains Mono", monospace;
+      /*font-family: "Jacquard 12", system-ui;*/
+      /*font-family: "Jacquarda Bastarda 9", serif;*/
+
+      font-size: 12px;
+    }
+
+    body {
+      display: grid;
+      grid-template-rows: auto 1fr auto; /* nav / project / contact */
+    }
+
+    /* =====================
+       1. PROJECT NAVIGATION
+       ===================== */
+    nav {
+      display: flex;
+      
+      align-items: flex-start;
+      justify-content: space-around;
+      overflow: visible;
+
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    nav a {
+
+      text-decoration: none;
+      color: inherit;
+      /*transform: rotate(-90deg) translateY(50px) translateX(-50px);*/
+      transform-origin: bottom left;
+
+      /*transform-origin: left bottom;*/
+
+      white-space: nowrap;
+      cursor: pointer;
+      line-height: 1;
+      
+      
+      text-align: left;
+
+
+      
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      font-weight: 400;
+    }
+
+
+    /* =====================
+       2. PROJECT SECTION
+       ===================== */
+    .project-section {
+      display: grid;
+      grid-template-columns: 18rem 1fr 3rem; /* text / display / slim details */
+      
+    }
+
+    /* Project text (bottom-left feeling) */
+    .project-text {
+      align-self: end;
+      padding: 1rem 1rem 10rem 1rem;
+      max-width: 40ch;
+    }
+
+    /* Project display (visual placeholder) */
+    .project-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      
+      border: solid;
+      border-radius: 10px;
+      background: rgba(100, 0, 0, 0.1);
+
+    }
+
+    .project-display::after {
+      content: "project display";
+      
+    }
+
+    /* Project details (right, rotated) */
+    .project-details {
+      padding: 1rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transform: rotate(90deg);
+      transform-origin: center;
+
+    }
+
+    .project-details span {
+      white-space: nowrap;
+      margin-right: 50px;
+      margin-left: 50px;
+    }
+
+    /* =====================
+       3. CONTACT INFO
+       ===================== */
+    footer {
+      display: flex;
+      justify-content: space-around;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+
+    <a>project</a>
+    <a>project</a>
+    <a>project</a>
+    <a>project</a>
+    <a>>> project <<</a>
+    <a>project</a>
+    <a>project</a>
+    <a>project</a>
+    <a>project</a>
+
+  </nav>
+
+  <!-- 2. Project text + display + details -->
+  <section class="project-section">
+    <div class="project-text">
+      <p>
+        This project explores minimal interfaces and structural imbalance.
+        Text replaces imagery, orientation replaces hierarchy.
+      </p>
+    </div>
+
+    <div class="project-display">
+      <!-- image / video / canvas goes here -->
+    </div>
+
+    <div class="project-details">
+      <span>2025</span><span>Creative Coding</span><span>Experimental Design</span>
+    </div>
+  </section>
+
+  <!-- 3. Contact info -->
+  <footer>
+    <span>find ULIANA GROMYKO at:</span>
+    <a href="">>> portfolio website <<</a>
+    <a href="mailto:you@email.com">you@email.com</a>
+    <a href="#">Instagram</a>
+    <a href="#">Are.na</a>
+  </footer>
+
+</body>
+</html>
